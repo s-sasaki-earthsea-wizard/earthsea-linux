@@ -1,15 +1,15 @@
+# Description: The main Makefile for the project.
+
+# Define the directories paths
+ROOT_DIR := $(shell pwd)
 MAKEFILES_DIR := makefiles
 CONFIG_DIR := configs
 
+# Read the configuration file
 include $(MAKEFILES_DIR)/system.mk
 include $(MAKEFILES_DIR)/cli.mk
 include $(MAKEFILES_DIR)/gui.mk
-
-# ------------------------------
-# Download GIS Data
-# ------------------------------
-
-# TBD
+include $(MAKEFILES_DIR)/data.mk
 
 # ------------------------------
 # Other Tools
@@ -29,10 +29,12 @@ include $(MAKEFILES_DIR)/gui.mk
 
 help:  # Show all available commands
 	@echo "Usage: make [TARGET]\n"
-	@echo "System-related commands:"
+	@echo "🌐System-related commands:"
 	@egrep "^(.+)\:\s+#\s(.+)" $(MAKEFILES_DIR)/system.mk | column -t -c 2 -s ':#'
-	@echo "\nCLI tool-related commands:"
+	@echo "\n🌐CLI tool-related commands:"
 	@egrep "^(.+)\:\s+#\s(.+)" $(MAKEFILES_DIR)/cli.mk | column -t -c 2 -s ':#'
-	@echo "\nGUI tool-related commands:"
+	@echo "\n🌐GUI tool-related commands:"
 	@egrep "^(.+)\:\s+#\s(.+)" $(MAKEFILES_DIR)/gui.mk | column -t -c 2 -s ':#'
+	@echo "\n🌐GIS Data-related commands:"
+	@egrep "^(.+)\:\s+#\s(.+)" $(MAKEFILES_DIR)/data.mk | column -t -c 2 -s ':#'
 	@echo "\nFor more information, see the README.md file."
